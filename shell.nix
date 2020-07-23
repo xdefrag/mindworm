@@ -36,10 +36,6 @@ let
     name = "vim";
     vimrcConfig.customRC = builtins.readFile ./vimrc;
     vimrcConfig.plug.plugins = with pkgs.vimPlugins; [
-      coc-json
-      coc-nvim
-      coc-snippets
-      coc-tabnine
       fugitive
       fzf-vim
       fzfWrapper
@@ -64,7 +60,6 @@ in pkgs.mkShell {
     blender
     fzf
     godot322
-    nodejs
     python
     sfxr
     vim
