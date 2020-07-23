@@ -59,5 +59,14 @@ let
   });
 
 in pkgs.mkShell {
-  buildInputs = with pkgs; [ godot322 blender python nodejs fzf vim ];
+  buildInputs = with pkgs; [
+    aseprite-unfree
+    blender
+    fzf
+    godot322
+    nodejs
+    python
+    sfxr
+    vim
+  ];
 }
