@@ -1,6 +1,17 @@
 { pkgs ? import <nixpkgs> { } }:
 
 let
+  godot322 = pkgs.godot.overrideAttrs (oldAttrs: rec {
+    version = "3.2.2";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "godotengine";
+      repo = "godot";
+      rev = "${version}-stable";
+      sha256 = "1kndls0rklha7kz9l4i2ivjxab4jpk3b2j7dcgcg2qc3s81yd0r6";
+    };
+  });
+
   vim-beelzebub = pkgs.vimUtils.buildVimPlugin {
     name = "vim-beelzebub";
     src = pkgs.fetchFromGitHub {
@@ -25,6 +36,7 @@ let
     name = "vim";
     vimrcConfig.customRC = builtins.readFile ./vimrc;
     vimrcConfig.plug.plugins = with pkgs.vimPlugins; [
+      coc-json
       coc-nvim
       coc-snippets
       coc-tabnine
@@ -46,4 +58,6 @@ let
     ];
   });
 
-in pkgs.mkShell { buildInputs = with pkgs; [ godot blender nodejs fzf vim ]; }
+in pkgs.mkShell {
+  buildInputs = with pkgs; [ godot322 blender python nodejs fzf vim ];
+}

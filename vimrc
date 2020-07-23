@@ -42,6 +42,7 @@ set statusline +=%2*%m%*     "modified flag
 set statusline +=%1*%=%5l%*  "current line
 set statusline +=%2*/%L%*    "total lines
 set statusline +=%1*%4v\ %*  "virtual column number
+set shortmess+=c
 
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
