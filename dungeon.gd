@@ -12,7 +12,6 @@ var pos = Vector3(5, 1, 5)
 var rot = 0
 
 func _ready():
-	get_node("Camera").set_translation(Vector3(pos.x*2+1, 1, pos.x*2+1))
 	set_process(true)
 	for x in range(map2.Map1.size()):
 		for y in range(map2.Map1[0].size()):
@@ -36,7 +35,3 @@ func _ready():
 						if n == "E":
 							wall[wall.size()-1].set_translation(Vector3(x*2+2, 1, y*2+1))
 							wall[wall.size()-1].rotate(Vector3(0, 1, 0), 1.57)
-
-func _process(_delta):
-	rot += 1; if rot == 100: rot = 0
-	get_node("Camera").rotate(Vector3(0, 1, 0), -0.0157)

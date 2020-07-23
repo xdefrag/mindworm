@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://dungeon.gd" type="Script" id=1]
+[ext_resource path="res://movement.gd" type="Script" id=2]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -15,6 +16,7 @@ environment = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 2 )
 
 [node name="SpotLight" type="SpotLight" parent="Camera"]
 light_color = Color( 0.823529, 0.823529, 0.823529, 1 )
