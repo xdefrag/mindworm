@@ -1,12 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://dungeon.gd" type="Script" id=1]
 [ext_resource path="res://movement.gd" type="Script" id=2]
+[ext_resource path="res://fog.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ProceduralSky" id=3]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
-ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.1
+background_sky = SubResource( 3 )
+background_sky_custom_fov = 50.1
+background_energy = 16.0
+ambient_light_energy = 0.0
+fog_color = Color( 0, 0.501961, 1, 1 )
+fog_sun_color = Color( 1, 1, 1, 1 )
+fog_sun_amount = 1.0
+fog_depth_begin = 44.0
+fog_depth_end = 307.7
+fog_depth_curve = 0.0457527
+fog_transmit_enabled = true
+fog_height_enabled = true
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.744307, 0.974767, 0.997493 )
@@ -21,15 +34,18 @@ environment = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="Player"]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 fov = 50.0
 
 [node name="SpotLight" type="SpotLight" parent="Player/Camera"]
-light_color = Color( 0.823529, 0.823529, 0.823529, 1 )
+light_color = Color( 0.423529, 0.662745, 1, 1 )
 light_energy = 2.39
+shadow_bias = 7.72
 spot_range = 4.2
 spot_angle = 60.0
+
+[node name="Particles" parent="Player/Camera" instance=ExtResource( 3 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.117373, -0.17123, -1.51238 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://meshes/square.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://textures/wall.png" type="Texture" id=2]
+[ext_resource path="res://assets_raw/particles/wall2.png" type="Texture" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 2 )
@@ -12,7 +12,7 @@ extents = Vector3( 1, 1, 0.0135894 )
 [node name="Wall" type="StaticBody"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+transform = Transform( 1.01, 0, 0, 0, -4.41485e-08, -1.01, 0, 1.01, -4.41485e-08, 0, 0, 0 )
 mesh = ExtResource( 1 )
 material/0 = SubResource( 1 )
 

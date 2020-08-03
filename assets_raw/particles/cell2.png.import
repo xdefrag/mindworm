@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/cell.png-72cbfa6effb23d317c58b66aa1618db7.s3tc.stex"
-path.etc="res://.import/cell.png-72cbfa6effb23d317c58b66aa1618db7.etc.stex"
+path.s3tc="res://.import/cell2.png-06c932713e0ecc182e6068a89611ac84.s3tc.stex"
+path.etc="res://.import/cell2.png-06c932713e0ecc182e6068a89611ac84.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/cell.png"
-dest_files=[ "res://.import/cell.png-72cbfa6effb23d317c58b66aa1618db7.s3tc.stex", "res://.import/cell.png-72cbfa6effb23d317c58b66aa1618db7.etc.stex" ]
+source_file="res://assets_raw/particles/cell2.png"
+dest_files=[ "res://.import/cell2.png-06c932713e0ecc182e6068a89611ac84.s3tc.stex", "res://.import/cell2.png-06c932713e0ecc182e6068a89611ac84.etc.stex" ]
 
 [params]
 
@@ -22,8 +22,8 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
