@@ -1,53 +1,59 @@
 extends Camera
 
-onready var map2 = preload("res://map.gd").new()
-var dir = {
-	"N": [ Vector3(0, 0, -1), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(1, 0, 0) ],
-	"S": [ Vector3(0, 0, 1), Vector3(0, 0, -1), Vector3(1, 0, 0), Vector3(-1, 0, 0) ],
-	"W": [ Vector3(-1, 0, 0), Vector3(1, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -1) ],
-	"E": [ Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, -1), Vector3(0, 0, 1) ]}
-var direct = ["N", "S", "W", "E"]
-var move = "stop"
-var step = 0
-var pos = Vector3(5, 1, 5)
-var rotL = 0
-var rot = 0
-var id = {87:0, 83:1, 65:2, 68:3}
+enum {
+	STOP,
+	MOVING
+}
 
-func step_mov(key):
-	if(Input.is_key_pressed(key) 
-	and map2.Map1[round(pos.z+dir[direct[0]][id[key]].z)][round(pos.x+dir[direct[0]][id[key]].x)] < 1
-	and move == "stop") or move == direct[id[key]]:
-		move = direct[id[key]]
-		step += 1
-		pos += 0.1*dir[direct[0]][id[key]]
-		if step == 10:
-			move = "stop"
-			step = 0
-			pos = Vector3(round(pos.x), 1, round(pos.z))
-		self.set_translation(Vector3(pos.x*2+1, 1, pos.z*2+1))
+var state: int = STOP
 
-func rot():
-	if (Input.is_key_pressed(KEY_Q)) and step == 0 and rot == 0 or rotL != 0:
-		if rotL == 0:
-			direct.push_back(direct[0])
-			direct.pop_front()
-		rotL += 1; if rotL == 100: rotL = 0
-		self.rotate(Vector3(0, 1, 0), -0.0157)
-	if (Input.is_key_pressed(KEY_E)) and step == 0 and rotL == 0 or rot != 0:
-		if rot == 0:
-			direct.push_front(direct[3])
-			direct.pop_back()
-		rot += 1; if rot == 100: rot = 0
-		self.rotate(Vector3(0, 1, 0), 0.0157)
+const step: int = 50 # increase for faster rotation
+
+var start_position: Vector3 = Vector3(11, 1, 11) # where it come from??
+
+var current_rotation: float = 0
+var current_rotation_step: float = 0
+
+var current_translate: float = 0
+var current_translate_step: float = 0
 
 func _ready():
-	self.set_translation(Vector3(pos.x*2+1, 1, pos.x*2+1))
+	self.set_translation(start_position)
 	set_process(true)
 
-func _process(delta):
-	step_mov(KEY_W)
-	step_mov(KEY_A)
-	step_mov(KEY_S)
-	step_mov(KEY_D)
-	rot()
+func _process(delta: float): match state:
+	STOP:
+		if Input.is_action_pressed("turn_left"):
+			current_rotation = PI / 2
+		elif Input.is_action_pressed("turn_right"):
+			current_rotation = - PI / 2
+		elif Input.is_action_pressed("move_forward"):
+			current_translate = -2
+		elif Input.is_action_pressed("move_back"):
+			current_translate = 2
+
+		if current_rotation != 0 or current_translate != 0:
+			state = MOVING
+	MOVING:
+		if current_rotation != 0 and current_rotation_step == 0:
+			current_rotation_step = current_rotation / step
+
+		if current_rotation > 0 and current_rotation_step > 0 or current_rotation < 0 and current_rotation_step < 0:
+			rotate_object_local(Vector3(0, 1, 0), current_rotation_step)
+			current_rotation -= current_rotation_step
+		else:
+			current_rotation = 0
+			current_rotation_step = 0
+
+		if current_translate != 0 and current_translate_step == 0:
+			current_translate_step = current_translate / step
+
+		if current_translate > 0 and current_translate_step > 0 or current_translate < 0 and current_translate_step < 0:
+			translate_object_local(Vector3(0, 0, current_translate_step))
+			current_translate -= current_translate_step
+		else:
+			current_translate = 0
+			current_translate_step = 0
+
+		if current_rotation == 0 and current_translate == 0:
+			state = STOP
