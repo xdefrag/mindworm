@@ -9,7 +9,7 @@ var state: int = STOP
 
 const step: int = 50 # increase for faster rotation
 
-var start_position: Vector3 = Vector3(11, 0, 11) # where it come from??
+var start_position: Vector3 = Vector3(0, 0, 0) # where it come from??
 
 var current_rotation: float = 0
 var current_rotation_step: float = 0

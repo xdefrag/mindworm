@@ -1,0 +1,23 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://procedural_dungeon.gd" type="Script" id=1]
+[ext_resource path="res://assets/metalic_pattern_texture_166.png" type="Texture" id=2]
+[ext_resource path="res://assets/old_stone_floor_texture_01-512x512.png" type="Texture" id=3]
+[ext_resource path="res://assets/ground_texture_02-512x512.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 4 )
+
+[node name="StaticBody" type="StaticBody"]
+script = ExtResource( 1 )
+size_x = 49
+size_y = 49
+wall_material = SubResource( 1 )
+floor_material = SubResource( 2 )
+ceiling_material = SubResource( 3 )
